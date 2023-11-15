@@ -1,9 +1,11 @@
 import Vapor
+import Fluent
+import FluentPostgresDriver
 
-// configures your application
 public func configure(_ app: Application) async throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    try app.databases.use(.postgres(url: ProcessInfo.processInfo.environment["DB_CONNECTION_STRING"] ?? ""), as: .psql)
+    
+    app.migrations.add(CreateOrder())
 
     // register routes
     try routes(app)
