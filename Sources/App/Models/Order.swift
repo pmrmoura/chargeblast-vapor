@@ -9,7 +9,11 @@ import Vapor
 import Fluent
 import FluentPostgresDriver
 
-final class OrderResult: Content {
+struct OrdersResponse: Content {
+    var orders: [Order]
+}
+
+struct OrderResult: Content {
     var order: Order
 }
 
